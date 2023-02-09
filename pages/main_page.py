@@ -3,7 +3,7 @@ from .locators import MainPageLocators
 
 
 class MainPage(BasePage):
-    def __init__(self, *pargs, **kwargs):
-        super(MainPage, self).__init__(*pargs, **kwargs)
 
-
+    def go_to_cart(self):
+        button = self.browser.find_element(*MainPageLocators.CART_LINK)
+        button.click()

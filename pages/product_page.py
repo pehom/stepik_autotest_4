@@ -11,7 +11,7 @@ class ProductPage(BasePage):
         button = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_BUTTON)
 
         button.click()
-        self.solve_quiz_and_get_code()
+        # self.solve_quiz_and_get_code()
 
     def get_added_product_name_and_price(self):
         name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_ADDED).text
@@ -31,5 +31,6 @@ class ProductPage(BasePage):
 
     def success_message_is_disappeared(self):
         return self.is_disappeared(*ProductPageLocators.PRODUCT_NAME_ADDED)
+
 
 

@@ -4,6 +4,7 @@ from selenium.common.exceptions import ElementNotVisibleException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 import math
 import time
 from .locators import BasePageLocators
@@ -54,6 +55,7 @@ class BasePage:
         x = alert.text.split(" ")[2]
         answer = str(math.log(abs((12 * math.sin(float(x))))))
         alert.send_keys(answer)
+        time.sleep(1.5)
         alert.accept()
         try:
             alert = self.browser.switch_to.alert
@@ -71,4 +73,13 @@ class BasePage:
     def should_be_login_link(self):
         assert self.is_element_present_and_visible(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
+    def go_to_basket_page(self, timeout=4):
+
+        try:
+            link = WebDriverWait(self.browser, timeout).until(
+                EC.presence_of_element_located(BasePageLocators.CART_LINK)
+            )
+            link.click()
+        except TimeoutException:
+            print(f'No cart button found')
 

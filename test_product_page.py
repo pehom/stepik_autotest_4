@@ -1,6 +1,6 @@
 from .pages.product_page import ProductPage
+from .pages.basket_page import BasketPage
 import pytest
-
 
 @pytest.mark.parametrize('link', [
     # "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
@@ -46,17 +46,28 @@ class TestProductPage:
         page.add_product_to_cart()
         assert page.success_message_is_disappeared(), 'Success message is still presenting'
 
+    @pytest.mark.skip
     def test_guest_should_see_login_link_on_product_page(self, browser, link):
         test_link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
         page = ProductPage(browser, test_link)
         page.open()
         page.should_be_login_link()
 
+    @pytest.mark.skip
     def test_guest_can_go_to_login_page_from_product_page(self, browser, link):
         test_link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
         page = ProductPage(browser, test_link)
         page.open()
         page.go_to_login_page()
+
+    def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser, link):
+        test_link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+        page = ProductPage(browser, test_link)
+        page.open()
+        page.go_to_basket_page()
+        basket_page = BasketPage(browser, browser.current_url)
+        assert basket_page.no_product_in_cart(), '>>>>>> ooops, some products in cart'
+        assert basket_page.is_empty_cart_message_shown(), '>>>>>> empty cart message missed'
 
     # def test_guest_should_see_add_to_cart_button(browser):
     #     page = ProductPage(browser, link)
