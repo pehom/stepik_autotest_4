@@ -83,3 +83,7 @@ class BasePage:
         except TimeoutException:
             print(f'No cart button found')
 
+    def should_be_authorized_user(self):
+        assert self.is_element_present_and_visible(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
+
