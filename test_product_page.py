@@ -32,13 +32,13 @@ class TestProductPage:
         page = ProductPage(browser, link)
         page.open()
         page.add_product_to_cart()
-        page.success_message_should_not_be_located()
+        page.should_not_be_success_message()
 
     @pytest.mark.skip
     def test_guest_cant_see_success_message(self, browser, link):
         page = ProductPage(browser, link)
         page.open()
-        page.success_message_should_not_be_located()
+        page.should_not_be_success_message()
 
     @pytest.mark.skip
     def test_message_disappeared_after_adding_product_to_basket(self, browser, link):
@@ -88,7 +88,7 @@ class TestUserAddToBasketFromProductPage:
         page = ProductPage(browser, link)
         page.open()
         # time.sleep(2)  # some delay to watch how everything is going
-        page.success_message_should_not_be_located()
+        page.should_not_be_success_message()
 
     @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser, link):

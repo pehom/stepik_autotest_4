@@ -31,7 +31,7 @@ class ProductPage(BasePage):
         assert self.product_name == added_product['name'] and self.product_price == added_product['price'], \
             "added data doesn't match"
 
-    def success_message_should_not_be_located(self):
+    def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.PRODUCT_NAME_ADDED), 'Success message presents'
 
     def success_message_should_disappear(self):
