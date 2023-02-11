@@ -1,7 +1,7 @@
-from . import locators
 from .base_page import BasePage
 from .locators import LoginPageLocators
 import time
+
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
@@ -29,6 +29,6 @@ class LoginPage(BasePage):
         password_confirm_input = self.browser.find_element(*LoginPageLocators.PASSWORD_CONFIRM_INPUT)
         password_confirm_input.send_keys(password)
         reg_button = self.browser.find_element(*LoginPageLocators.REGISTER_BUTTON)
-        time.sleep(2)  # some delay to watch how everything is going
+        # time.sleep(2)  # some delay to watch how everything is going
         reg_button.click()
 

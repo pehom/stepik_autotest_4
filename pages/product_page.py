@@ -11,7 +11,7 @@ class ProductPage(BasePage):
         button = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_BUTTON)
 
         button.click()
-        # self.solve_quiz_and_get_code()
+        self.solve_quiz_and_get_code()
 
     def get_added_product_name_and_price(self):
         name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_ADDED).text
@@ -26,11 +26,16 @@ class ProductPage(BasePage):
         print(f'>>>>>>>>>product_name = {self.product_name}')
         print(f'>>>>>>>>>product_price = {self.product_price}')
 
-    def success_message_is_not_located(self):
-        return self.is_not_element_present(*ProductPageLocators.PRODUCT_NAME_ADDED)
+    def should_match_chosen_and_added_products(self):
+        added_product = self.get_added_product_name_and_price()
+        assert self.product_name == added_product['name'] and self.product_price == added_product['price'], \
+            "added data doesn't match"
 
-    def success_message_is_disappeared(self):
-        return self.is_disappeared(*ProductPageLocators.PRODUCT_NAME_ADDED)
+    def success_message_should_not_be_located(self):
+        assert self.is_not_element_present(*ProductPageLocators.PRODUCT_NAME_ADDED), 'Success message presents'
+
+    def success_message_should_disappear(self):
+        assert self.is_disappeared(*ProductPageLocators.PRODUCT_NAME_ADDED), 'Success message is still presenting'
 
 
 

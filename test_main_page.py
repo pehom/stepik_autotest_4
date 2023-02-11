@@ -1,4 +1,3 @@
-import time
 import pytest
 from .pages.main_page import MainPage
 from .pages.login_page import LoginPage
@@ -30,5 +29,5 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
     page.open()
     page.go_to_basket_page()
     basket_page = BasketPage(browser, browser.current_url)
-    assert basket_page.no_product_in_cart(), '>>>>>> ooops, some products in cart'
-    assert basket_page.is_empty_cart_message_shown(), '>>>>>> empty cart message missed'
+    basket_page.should_be_no_product_in_cart()
+    basket_page.should_be_empty_cart_message()

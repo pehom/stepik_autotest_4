@@ -15,5 +15,8 @@ class BasketPage(BasePage):
         except NoSuchElementException:
             return False
 
-    def no_product_in_cart(self):
-        return self.is_not_element_present(*BasketPageLocators.CART_PRODUCT)
+    def should_be_no_product_in_cart(self):
+        assert self.is_not_element_present(*BasketPageLocators.CART_PRODUCT), '>>>>>> ooops, some products in cart'
+
+    def should_be_empty_cart_message(self):
+        assert self.is_empty_cart_message_shown(), '>>>>>> empty cart message missed'
